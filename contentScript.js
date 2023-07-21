@@ -6,8 +6,6 @@
     To modify or redistribute, kindly follow the license agreement strictly.
 */
 
-
-
 //--------------------//
 
 let current_tab_url = window.location.href;
@@ -49,26 +47,34 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
           }) > div > label > span`
         )
         .click();
-      document
-        .querySelector(
-          "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.d-block.d-lg-none.fixed-bottom.ng-star-inserted > div > a"
-        )
-        .click();
+      const pageWrapper = document.querySelector("#page-wrapper");
+
+      const saveAndNextButton = pageWrapper.querySelector(
+        "div.d-block.d-lg-none.fixed-bottom.ng-star-inserted a.btn-primary"
+      );
+
+      if (saveAndNextButton) {
+        saveAndNextButton.click();
+      }
     }, 2000);
 
     setTimeout(() => {
-      document
-        .querySelector(
-          "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.save-next-btn.d-block.d-lg-none.fixed-bottom.ng-star-inserted > a"
-        )
-        .click();
+      const nextbtn = document.querySelector(
+        "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.d-block.d-lg-none.fixed-bottom.ng-star-inserted>div.no-gutters> div:nth-child(2)> a.btn.btn-primary"
+      );
+      if (!nextbtn) {
+        document
+          .querySelector(
+            "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.d-block.d-lg-none.fixed-bottom.ng-star-inserted>div.no-gutters> div:nth-child(1)> a.btn.btn-primary"
+          )
+          .click();
+      } else {
+        nextbtn.click();
+      }
     }, 3000);
   }
 
   if (message.msg == "start") {
     chrome.runtime.sendMessage({ msg: "startPanel" });
-  };
+  }
 });
-
-
-
