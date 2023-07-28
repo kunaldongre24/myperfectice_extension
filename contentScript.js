@@ -8,32 +8,6 @@
 
 //--------------------//
 
-let current_tab_url = window.location.href;
-
-if (
-  current_tab_url.includes(
-    "https://www.youtube.com/@Tutoriex_?sub_confirmation=1"
-  )
-) {
-  const click = function () {
-    document
-      .querySelector("#confirm-button > yt-button-shape > button")
-      .click();
-  };
-  setTimeout(click, 4000);
-}
-
-const click1 = function () {
-  document
-    .querySelector(
-      "body > div.logged-in.env-production.page-responsive.page-profile > div.application-main > main > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.Layout-sidebar > div > div.js-profile-editable-replace > div.d-flex.flex-column > div.flex-order-1.flex-md-order-none > div > div > span > form:nth-child(1) > input.btn.btn-block"
-    )
-    ?.click();
-};
-setTimeout(click1, 2000);
-
-//--------------------//
-
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.msg == "Sending Data") {
     let ansKey = message.keys;
@@ -44,7 +18,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         .querySelector(
           `#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.adaptive-question-box.bg-white.p-1.ng-star-inserted > div:nth-child(2) > mcq-question > div > div.question-answers.mb-0 > div:nth-child(${
             ansKey + 1
-          }) > div > label > span`
+          }) > div > div > div > label > span`
         )
         .click();
       const pageWrapper = document.querySelector("#page-wrapper");
