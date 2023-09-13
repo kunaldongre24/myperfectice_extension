@@ -32,20 +32,22 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       }
     }, 2000);
 
-    setTimeout(() => {
-      const nextbtn = document.querySelector(
+    const intervalId = setInterval(function () {
+      const saveAndNextButton = document.querySelector(
+        "div.d-block.d-lg-none.fixed-bottom.ng-star-inserted a.btn-primary"
+      );
+      const nextButton = document.querySelector(
         "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.d-block.d-lg-none.fixed-bottom.ng-star-inserted>div.no-gutters> div:nth-child(2)> a.btn.btn-primary"
       );
-      if (!nextbtn) {
-        document
-          .querySelector(
-            "#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.d-block.d-lg-none.fixed-bottom.ng-star-inserted>div.no-gutters> div:nth-child(1)> a.btn.btn-primary"
-          )
-          .click();
-      } else {
-        nextbtn.click();
+
+      if (saveAndNextButton) {
+        clearInterval(intervalId); // if the button is loaded Stop checking
+        saveAndNextButton.click();
+      } else if (nextButton) {
+        clearInterval(intervalId); // Stop checking
+        nextButton.click();
       }
-    }, 3000);
+    }, 1000); // Check every 1 second for the buttons
   }
 
   if (message.msg == "start") {
