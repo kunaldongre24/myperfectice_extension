@@ -12,13 +12,12 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.msg == "Sending Data") {
     let ansKey = message.keys;
     console.log(ansKey);
-    //time out for 2 secoond
     setTimeout(function () {
       document
         .querySelector(
           `#page-wrapper > p-student > app-learning-test > div.adaptive-question > div > div > div.adaptive-question-box.bg-white.p-1.ng-star-inserted > div:nth-child(2) > mcq-question > div > div.question-answers.mb-0 > div:nth-child(${
             ansKey + 1
-          }) > div > div > div > label > span`
+          }) > div > label > span`
         )
         .click();
       const pageWrapper = document.querySelector("#page-wrapper");
